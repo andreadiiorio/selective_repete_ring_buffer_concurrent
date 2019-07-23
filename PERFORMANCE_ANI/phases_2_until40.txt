@@ -1,0 +1,432 @@
+andysnake@debian:~$ cd Scrivania/net/PRJNETWORKING/sources/
+client/  GUI/     headers/ server/  tests/   timers/  ttimer/  
+andysnake@debian:~$ cd Scrivania/net/PRJNETWORKING/sources/
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources$ vim getTimesAutomation.sh 
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources$ ./getTimesAutomation.sh 2
+1 arguments passed
+2
+END PHASE 0
+END PHASE 1
+gcc -o client.o client/clientStart.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+gcc -o server.o server/serverBis.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1024	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+testing with winsize of 3 and extra space of 3
+./test.o enjoy.mp4 3 3 0.25 
+TX_CONFIGS: wsize 3 extraRingBuffSpace 3 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 6 pcks of size :1024 
+transmission configs : winsize :3 extrabuf in ring:3 maxseqN:12 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:49552
+
+cbuf of 6 pcks of size :1024 
+transmission configs : winsize :3 extrabuf in ring:3 maxseqN:12 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 380 , 689241 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 6 and extra space of 3
+./test.o enjoy.mp4 6 3 0.25 
+TX_CONFIGS: wsize 6 extraRingBuffSpace 3 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 9 pcks of size :1024 
+transmission configs : winsize :6 extrabuf in ring:3 maxseqN:18 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:58181
+
+cbuf of 9 pcks of size :1024 
+transmission configs : winsize :6 extrabuf in ring:3 maxseqN:18 
+
+ ACKKED 100% 
+
+
+ Elapsed secs and micros: 252 , 282961 
+
+acker OK!:)
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+testing with winsize of 9 and extra space of 3
+./test.o enjoy.mp4 9 3 0.25 
+TX_CONFIGS: wsize 9 extraRingBuffSpace 3 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 12 pcks of size :1024 
+transmission configs : winsize :9 extrabuf in ring:3 maxseqN:24 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:60918
+
+cbuf of 12 pcks of size :1024 
+transmission configs : winsize :9 extrabuf in ring:3 maxseqN:24 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 183 , 484512 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 12 and extra space of 3
+./test.o enjoy.mp4 12 3 0.25 
+TX_CONFIGS: wsize 12 extraRingBuffSpace 3 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 15 pcks of size :1024 
+CONNECTED WITH 127.0.0.1:39264
+transmission configs : winsize :12 extrabuf in ring:3 maxseqN:30 
+starting stopwatch 
+
+cbuf of 15 pcks of size :1024 
+transmission configs : winsize :12 extrabuf in ring:3 maxseqN:30 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 147 , 795531 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 15 and extra space of 4
+./test.o enjoy.mp4 15 4 0.25 
+TX_CONFIGS: wsize 15 extraRingBuffSpace 4 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 19 pcks of size :1024 
+transmission configs : winsize :15 extrabuf in ring:4 maxseqN:38 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:57762
+
+cbuf of 19 pcks of size :1024 
+transmission configs : winsize :15 extrabuf in ring:4 maxseqN:38 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 118 , 896745 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 18 and extra space of 4
+./test.o enjoy.mp4 18 4 0.25 
+TX_CONFIGS: wsize 18 extraRingBuffSpace 4 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 22 pcks of size :1024 
+transmission configs : winsize :18 extrabuf in ring:4 maxseqN:44 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:46466
+
+cbuf of 22 pcks of size :1024 
+transmission configs : winsize :18 extrabuf in ring:4 maxseqN:44 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 99 , 871960 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 21 and extra space of 4
+./test.o enjoy.mp4 21 4 0.25 
+TX_CONFIGS: wsize 21 extraRingBuffSpace 4 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 25 pcks of size :1024 
+transmission configs : winsize :21 extrabuf in ring:4 maxseqN:50 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:40275
+
+cbuf of 25 pcks of size :1024 
+transmission configs : winsize :21 extrabuf in ring:4 maxseqN:50 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 85 , 38799 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 24 and extra space of 4
+./test.o enjoy.mp4 24 4 0.25 
+TX_CONFIGS: wsize 24 extraRingBuffSpace 4 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 28 pcks of size :1024 
+transmission configs : winsize :24 extrabuf in ring:4 maxseqN:56 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:37285
+
+cbuf of 28 pcks of size :1024 
+transmission configs : winsize :24 extrabuf in ring:4 maxseqN:56 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 74 , 931989 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 27 and extra space of 4
+./test.o enjoy.mp4 27 4 0.25 
+TX_CONFIGS: wsize 27 extraRingBuffSpace 4 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 31 pcks of size :1024 
+transmission configs : winsize :27 extrabuf in ring:4 maxseqN:62 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:35778
+
+cbuf of 31 pcks of size :1024 
+transmission configs : winsize :27 extrabuf in ring:4 maxseqN:62 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 62 , 778718 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 30 and extra space of 5
+./test.o enjoy.mp4 30 5 0.25 
+TX_CONFIGS: wsize 30 extraRingBuffSpace 5 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 35 pcks of size :1024 
+transmission configs : winsize :30 extrabuf in ring:5 maxseqN:70 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:42705
+
+cbuf of 35 pcks of size :1024 
+transmission configs : winsize :30 extrabuf in ring:5 maxseqN:70 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 57 , 47078 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 33 and extra space of 5
+./test.o enjoy.mp4 33 5 0.25 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 5 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 38 pcks of size :1024 
+transmission configs : winsize :33 extrabuf in ring:5 maxseqN:76 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:49886
+
+cbuf of 38 pcks of size :1024 
+transmission configs : winsize :33 extrabuf in ring:5 maxseqN:76 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 51 , 809696 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+testing with winsize of 36 and extra space of 5
+./test.o enjoy.mp4 36 5 0.25 
+TX_CONFIGS: wsize 36 extraRingBuffSpace 5 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 41 pcks of size :1024 
+transmission configs : winsize :36 extrabuf in ring:5 maxseqN:82 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:42444
+
+cbuf of 41 pcks of size :1024 
+transmission configs : winsize :36 extrabuf in ring:5 maxseqN:82 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 49 , 532377 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 39 and extra space of 5
+./test.o enjoy.mp4 39 5 0.25 
+TX_CONFIGS: wsize 39 extraRingBuffSpace 5 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 44 pcks of size :1024 
+transmission configs : winsize :39 extrabuf in ring:5 maxseqN:88 
+CONNECTED WITH 127.0.0.1:43953
+starting stopwatch 
+
+cbuf of 44 pcks of size :1024 
+transmission configs : winsize :39 extrabuf in ring:5 maxseqN:88 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 44 , 459703 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+END PHASE 2
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources$ cd tests/
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources/tests$ ./test.o 100 5 0.25
+./test.o 100 5 0.25 
+usage :usage: <filename,winsize,extraRingBuffSize,lossP>
+ USING DEFAULT FILE AND CONFIGS
+TX_CONFIGS: wsize 22 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 25 pcks of size :1024 
+CONNECTED WITH 127.0.0.1:43589
+
+cbuf of 25 pcks of size :1024 
+transmission configs : winsize :22 extrabuf in ring:3 maxseqN:50 
+starting stopwatch 
+transmission configs : winsize :22 extrabuf in ring:3 maxseqN:50 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 4 , 44078 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources/tests$ ./test.o enjoy.mp4 100 5 0.25
+./test.o enjoy.mp4 100 5 0.25 
+TX_CONFIGS: wsize 100 extraRingBuffSpace 5 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 105 pcks of size :1024 
+CONNECTED WITH 127.0.0.1:42413
+transmission configs : winsize :100 extrabuf in ring:5 maxseqN:210 
+starting stopwatch 
+
+cbuf of 105 pcks of size :1024 
+transmission configs : winsize :100 extrabuf in ring:5 maxseqN:210 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 16 , 835738 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources/tests$ ./test.o enjoy.mp4 200 5 0.25
+./test.o enjoy.mp4 200 5 0.25 
+TX_CONFIGS: wsize 200 extraRingBuffSpace 5 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 205 pcks of size :1024 
+CONNECTED WITH 127.0.0.1:42021
+
+cbuf of 205 pcks of size :1024 
+transmission configs : winsize :200 extrabuf in ring:5 maxseqN:410 
+starting stopwatch 
+transmission configs : winsize :200 extrabuf in ring:5 maxseqN:410 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 12 , 702132 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources/tests$ ./test.o enjoy.mp4 300 5 0.25
+./test.o enjoy.mp4 300 5 0.25 
+TX_CONFIGS: wsize 300 extraRingBuffSpace 5 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 305 pcks of size :1024 
+CONNECTED WITH 127.0.0.1:51725
+
+cbuf of 305 pcks of size :1024 
+transmission configs : winsize :300 extrabuf in ring:5 maxseqN:610 
+starting stopwatch 
+transmission configs : winsize :300 extrabuf in ring:5 maxseqN:610 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 11 , 769153 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources/tests$ ./test.o enjoy.mp4 400 5 0.25
+./test.o enjoy.mp4 400 5 0.25 
+TX_CONFIGS: wsize 400 extraRingBuffSpace 5 lossProb 0.250000 
+TESTING WITH FILE:enjoy.mp4 of 62047639 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 405 pcks of size :1024 
+CONNECTED WITH 127.0.0.1:58646
+
+cbuf of 405 pcks of size :1024 
+transmission configs : winsize :400 extrabuf in ring:5 maxseqN:810 
+starting stopwatch 
+transmission configs : winsize :400 extrabuf in ring:5 maxseqN:810 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 10 , 336995 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff enjoy.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources/tests$ 

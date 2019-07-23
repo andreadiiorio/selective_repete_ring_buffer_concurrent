@@ -1,0 +1,2107 @@
+andysnake@debian:~$ cd Scrivania/net/PRJNETWORKING/
+andysnake@debian:~/Scrivania/net/PRJNETWORKING$ ls
+baseRefactoring.xml
+checkopts_easymod.c
+cmake-build-debug
+CMakeLists.txt
+codestyles
+colors.scheme.xml
+debugger.xml
+dumpAll.zip
+editor.xml
+files_sendable
+find.xml
+gitGuideBasic.txt
+ide.general.xml
+inspection
+_linux
+Makefile
+-_MAKEFILE_UPDATED__changed_executable_location__removed_server_redundant_print_reached_tx.patch
+notes
+otherStuff
+project.default.xml
+sources
+terminal.xml
+try0
+trys
+ui.lnf.xml
+vcs.xml
+vim_settings.xml
+andysnake@debian:~/Scrivania/net/PRJNETWORKING$ cd sources/
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources$ nice -n -20 ./
+client/                headers/               timers/
+client.o               server/                ttimer/
+getTimesAutomation.sh  server.o               
+GUI/                   tests/                 
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources$ nice -n -20 ./getTimesAutomation.sh 0
+nice: impossibile impostare la priorità di scheduling: Permesso negato
+1 arguments passed
+0
+testing with pck of 512 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=512	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :512 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:35387
+
+cbuf of 36 pcks of size :512 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+^C
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources$ sudo nice -n -20 ./getTimesAutomation.sh 0
+[sudo] password di andysnake: 
+1 arguments passed
+0
+testing with pck of 512 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=512	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :512 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:50391
+
+cbuf of 36 pcks of size :512 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 5 , 606807 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 612 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=612	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :612 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:51934
+
+cbuf of 36 pcks of size :612 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 4 , 572340 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 712 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=712	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+CONNECTED WITH 127.0.0.1:50094
+
+cbuf of 36 pcks of size :712 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :712 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 3 , 880522 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 812 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=812	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :812 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:34968
+
+cbuf of 36 pcks of size :812 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 3 , 427140 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 912 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=912	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :912 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:36200
+
+cbuf of 36 pcks of size :912 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 3 , 19116 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1012 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1012	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1012 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:59089
+
+cbuf of 36 pcks of size :1012 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 2 , 796774 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1112 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1112	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1112 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:36398
+
+cbuf of 36 pcks of size :1112 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 2 , 282909 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1212 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1212	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1212 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:40407
+
+cbuf of 36 pcks of size :1212 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 2 , 325384 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1312 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1312	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1312 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+CONNECTED WITH 127.0.0.1:40148
+starting stopwatch 
+
+cbuf of 36 pcks of size :1312 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 2 , 164915 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1412 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1412	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1412 
+CONNECTED WITH 127.0.0.1:42887
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+
+cbuf of 36 pcks of size :1412 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 876495 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1512 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1512	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1512 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:51619
+
+cbuf of 36 pcks of size :1512 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 857733 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1612 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1612	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1612 
+CONNECTED WITH 127.0.0.1:43098
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+
+cbuf of 36 pcks of size :1612 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 1 , 790059 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1712 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1712	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1712 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:59845
+
+cbuf of 36 pcks of size :1712 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 678892 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1812 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1812	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1812 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:37611
+
+cbuf of 36 pcks of size :1812 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 525915 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 1912 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1912	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1912 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+CONNECTED WITH 127.0.0.1:35539
+starting stopwatch 
+
+cbuf of 36 pcks of size :1912 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 423831 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 2012 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2012	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :2012 
+CONNECTED WITH 127.0.0.1:51108
+
+cbuf of 36 pcks of size :2012 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 366290 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 2112 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2112	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :2112 
+CONNECTED WITH 127.0.0.1:55909
+
+cbuf of 36 pcks of size :2112 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 380725 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 2212 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2212	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :2212 
+CONNECTED WITH 127.0.0.1:46292
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+
+cbuf of 36 pcks of size :2212 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 295176 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 2312 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2312	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :2312 
+CONNECTED WITH 127.0.0.1:56930
+
+cbuf of 36 pcks of size :2312 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 231215 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 2412 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2412	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :2412 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+CONNECTED WITH 127.0.0.1:37492
+starting stopwatch 
+
+cbuf of 36 pcks of size :2412 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 152153 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 2512 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2512	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :2512 
+CONNECTED WITH 127.0.0.1:48215
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+
+cbuf of 36 pcks of size :2512 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 135997 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 2612 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2612	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+CONNECTED WITH 127.0.0.1:52362
+cbuf of 36 pcks of size :2612 
+
+cbuf of 36 pcks of size :2612 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 1 , 130687 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 2712 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2712	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :2712 
+CONNECTED WITH 127.0.0.1:53252
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+
+cbuf of 36 pcks of size :2712 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 1 , 455141 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+testing with pck of 2812 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2812	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :2812 
+CONNECTED WITH 127.0.0.1:40889
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+
+cbuf of 36 pcks of size :2812 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 978781 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 2912 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=2912	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :2912 
+CONNECTED WITH 127.0.0.1:40328
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+
+cbuf of 36 pcks of size :2912 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 1 , 13165 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 3012 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=3012	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3012 
+CONNECTED WITH 127.0.0.1:57932
+
+cbuf of 36 pcks of size :3012 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 843272 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 3112 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=3112	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3112 
+CONNECTED WITH 127.0.0.1:42109
+
+cbuf of 36 pcks of size :3112 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 959052 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 3212 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=3212	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3212 
+CONNECTED WITH 127.0.0.1:33730
+
+cbuf of 36 pcks of size :3212 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 841276 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 3312 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=3312	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3312 
+CONNECTED WITH 127.0.0.1:34654
+
+cbuf of 36 pcks of size :3312 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 758789 
+
+RESULT RECEIVER SIDE :success 
+RESULT SENDER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 3412 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=3412	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+CONNECTED WITH 127.0.0.1:52257
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3412 
+
+cbuf of 36 pcks of size :3412 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 803096 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+testing with pck of 3512 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=3512	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3512 
+CONNECTED WITH 127.0.0.1:60179
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+cbuf of 36 pcks of size :3512 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 781414 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 3612 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=3612	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3612 
+CONNECTED WITH 127.0.0.1:51118
+
+cbuf of 36 pcks of size :3612 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 757047 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 3712 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=3712	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3712 
+CONNECTED WITH 127.0.0.1:40403
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+starting stopwatch 
+cbuf of 36 pcks of size :3712 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 831540 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 3812 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=3812	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3812 
+CONNECTED WITH 127.0.0.1:35871
+
+cbuf of 36 pcks of size :3812 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 783360 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 3912 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=3912	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :3912 
+CONNECTED WITH 127.0.0.1:42766
+
+cbuf of 36 pcks of size :3912 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 778177 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4012 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4012	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4012 
+CONNECTED WITH 127.0.0.1:39237
+
+cbuf of 36 pcks of size :4012 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 763452 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4112 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4112	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4112 
+CONNECTED WITH 127.0.0.1:51137
+
+cbuf of 36 pcks of size :4112 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 747846 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4212 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4212	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4212 
+CONNECTED WITH 127.0.0.1:38916
+
+cbuf of 36 pcks of size :4212 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 665540 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4312 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4312	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4312 
+CONNECTED WITH 127.0.0.1:37464
+
+cbuf of 36 pcks of size :4312 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 727630 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4412 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4412	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4412 
+CONNECTED WITH 127.0.0.1:34517
+
+cbuf of 36 pcks of size :4412 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 719568 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4512 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4512	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4512 
+CONNECTED WITH 127.0.0.1:32913
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+cbuf of 36 pcks of size :4512 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 716233 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4612 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4612	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4612 
+CONNECTED WITH 127.0.0.1:53426
+
+cbuf of 36 pcks of size :4612 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 699913 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4712 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4712	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4712 
+CONNECTED WITH 127.0.0.1:43700
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+cbuf of 36 pcks of size :4712 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 728583 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4812 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4812	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4812 
+CONNECTED WITH 127.0.0.1:40308
+
+cbuf of 36 pcks of size :4812 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 663158 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 4912 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=4912	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :4912 
+CONNECTED WITH 127.0.0.1:48323
+
+cbuf of 36 pcks of size :4912 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 636664 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5012 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=5012	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :5012 
+CONNECTED WITH 127.0.0.1:54526
+
+cbuf of 36 pcks of size :5012 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 684978 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5112 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=5112	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :5112 
+CONNECTED WITH 127.0.0.1:53120
+
+cbuf of 36 pcks of size :5112 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 639444 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5212 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT	 -D PCKPAYLOADSIZE=5212	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :5212 
+CONNECTED WITH 127.0.0.1:37153
+
+cbuf of 36 pcks of size :5212 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 705166 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5312 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=5312	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :5312 
+CONNECTED WITH 127.0.0.1:40428
+
+cbuf of 36 pcks of size :5312 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 678628 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5412 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=5412	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+CONNECTED WITH 127.0.0.1:36673
+cbuf of 36 pcks of size :5412 
+
+cbuf of 36 pcks of size :5412 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 675313 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5512 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=5512	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :5512 
+CONNECTED WITH 127.0.0.1:48151
+
+cbuf of 36 pcks of size :5512 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 681827 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5612 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=5612	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :5612 
+CONNECTED WITH 127.0.0.1:45462
+
+cbuf of 36 pcks of size :5612 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 692582 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5712 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=5712	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :5712 
+CONNECTED WITH 127.0.0.1:52143
+
+cbuf of 36 pcks of size :5712 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 662701 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5812 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=5812	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+CONNECTED WITH 127.0.0.1:58876
+cbuf of 36 pcks of size :5812 
+
+cbuf of 36 pcks of size :5812 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 815881 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 5912 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=5912	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :5912 
+CONNECTED WITH 127.0.0.1:56889
+
+cbuf of 36 pcks of size :5912 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 606643 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6012 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6012	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6012 
+CONNECTED WITH 127.0.0.1:53887
+
+cbuf of 36 pcks of size :6012 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 666630 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6112 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6112	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6112 
+CONNECTED WITH 127.0.0.1:43329
+
+cbuf of 36 pcks of size :6112 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 666324 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6212 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6212	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6212 
+CONNECTED WITH 127.0.0.1:34334
+
+cbuf of 36 pcks of size :6212 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 672986 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6312 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6312	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6312 
+CONNECTED WITH 127.0.0.1:47216
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+
+cbuf of 36 pcks of size :6312 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 607344 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6412 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6412	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6412 
+CONNECTED WITH 127.0.0.1:33981
+
+cbuf of 36 pcks of size :6412 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 667236 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6512 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6512	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6512 
+CONNECTED WITH 127.0.0.1:58109
+
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+cbuf of 36 pcks of size :6512 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 621574 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6612 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6612	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6612 
+CONNECTED WITH 127.0.0.1:55793
+
+cbuf of 36 pcks of size :6612 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 649649 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6712 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6712	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6712 
+CONNECTED WITH 127.0.0.1:45677
+
+cbuf of 36 pcks of size :6712 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 646437 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6812 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6812	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6812 
+CONNECTED WITH 127.0.0.1:36784
+
+cbuf of 36 pcks of size :6812 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 639555 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 6912 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=6912	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :6912 
+CONNECTED WITH 127.0.0.1:45886
+
+cbuf of 36 pcks of size :6912 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 637472 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 7012 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=7012	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :7012 
+CONNECTED WITH 127.0.0.1:40998
+
+cbuf of 36 pcks of size :7012 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 0 , 661637 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with pck of 7112 bytes
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=7112	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :7112 
+CONNECTED WITH 127.0.0.1:50810
+
+cbuf of 36 pcks of size :7112 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 0 , 621983 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+END PHASE 0
+gcc -o tests/test.o tests/trasmissionTest.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX  -D TEST_QUIET_PRINT		 -D PCKPAYLOADSIZE=1024	
+gcc -o tests/test_concurrent.o tests/multiTX_test.c -pthread -lm -pthread -lpthread -lrt  -I headers -I . -D _LARGEFILE64_SOURCE -D _GNU_SOURCE	 -D TIMEOUTFIX
+testing with winsize of 3 and extra space of 3
+./test.o k.mp4 3 3 0 
+TX_CONFIGS: wsize 3 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+CONNECTED WITH 127.0.0.1:55317
+cbuf of 6 pcks of size :1024 
+
+cbuf of 6 pcks of size :1024 
+transmission configs : winsize :3 extrabuf in ring:3 maxseqN:12 
+starting stopwatch 
+transmission configs : winsize :3 extrabuf in ring:3 maxseqN:12 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 34 , 657576 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 5 and extra space of 3
+./test.o k.mp4 5 3 0 
+TX_CONFIGS: wsize 5 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+CONNECTED WITH 127.0.0.1:54828
+connected with server at 127.0.0.1:5300
+cbuf of 8 pcks of size :1024 
+
+cbuf of 8 pcks of size :1024 
+transmission configs : winsize :5 extrabuf in ring:3 maxseqN:16 
+starting stopwatch 
+transmission configs : winsize :5 extrabuf in ring:3 maxseqN:16 
+
+ ACKKED 100% 
+
+
+ Elapsed secs and micros: 15 , 160939 
+
+acker OK!:)
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+testing with winsize of 7 and extra space of 3
+./test.o k.mp4 7 3 0 
+TX_CONFIGS: wsize 7 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 10 pcks of size :1024 
+transmission configs : winsize :7 extrabuf in ring:3 maxseqN:20 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:59401
+
+cbuf of 10 pcks of size :1024 
+transmission configs : winsize :7 extrabuf in ring:3 maxseqN:20 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 10 , 780047 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 9 and extra space of 3
+./test.o k.mp4 9 3 0 
+TX_CONFIGS: wsize 9 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 12 pcks of size :1024 
+transmission configs : winsize :9 extrabuf in ring:3 maxseqN:24 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:47469
+
+cbuf of 12 pcks of size :1024 
+transmission configs : winsize :9 extrabuf in ring:3 maxseqN:24 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 8 , 730632 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 11 and extra space of 3
+./test.o k.mp4 11 3 0 
+TX_CONFIGS: wsize 11 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 14 pcks of size :1024 
+transmission configs : winsize :11 extrabuf in ring:3 maxseqN:28 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:38507
+
+cbuf of 14 pcks of size :1024 
+transmission configs : winsize :11 extrabuf in ring:3 maxseqN:28 
+
+ ACKKED 100% 
+
+
+ Elapsed secs and micros: 7 , 254316 
+
+RESULT RECEIVER SIDE :success 
+acker OK!:)
+ command string for test :diff k.mp4 a.mp4 
+RESULT SENDER SIDE :success 
+RESULT DIFF OF FILES:success 
+testing with winsize of 13 and extra space of 3
+./test.o k.mp4 13 3 0 
+TX_CONFIGS: wsize 13 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 16 pcks of size :1024 
+transmission configs : winsize :13 extrabuf in ring:3 maxseqN:32 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:60750
+
+cbuf of 16 pcks of size :1024 
+transmission configs : winsize :13 extrabuf in ring:3 maxseqN:32 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 7 , 734034 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 15 and extra space of 3
+./test.o k.mp4 15 3 0 
+TX_CONFIGS: wsize 15 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 18 pcks of size :1024 
+transmission configs : winsize :15 extrabuf in ring:3 maxseqN:36 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:55445
+
+cbuf of 18 pcks of size :1024 
+transmission configs : winsize :15 extrabuf in ring:3 maxseqN:36 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 5 , 629630 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 17 and extra space of 3
+./test.o k.mp4 17 3 0 
+TX_CONFIGS: wsize 17 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 20 pcks of size :1024 
+transmission configs : winsize :17 extrabuf in ring:3 maxseqN:40 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:34230
+
+cbuf of 20 pcks of size :1024 
+transmission configs : winsize :17 extrabuf in ring:3 maxseqN:40 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 4 , 813639 
+
+RESULT RECEIVER SIDE :success 
+RESULT SENDER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 19 and extra space of 3
+./test.o k.mp4 19 3 0 
+TX_CONFIGS: wsize 19 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 22 pcks of size :1024 
+transmission configs : winsize :19 extrabuf in ring:3 maxseqN:44 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:38729
+
+cbuf of 22 pcks of size :1024 
+transmission configs : winsize :19 extrabuf in ring:3 maxseqN:44 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 4 , 455700 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 21 and extra space of 3
+./test.o k.mp4 21 3 0 
+TX_CONFIGS: wsize 21 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 24 pcks of size :1024 
+transmission configs : winsize :21 extrabuf in ring:3 maxseqN:48 
+CONNECTED WITH 127.0.0.1:60043
+starting stopwatch 
+
+cbuf of 24 pcks of size :1024 
+transmission configs : winsize :21 extrabuf in ring:3 maxseqN:48 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 3 , 990417 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 23 and extra space of 3
+./test.o k.mp4 23 3 0 
+TX_CONFIGS: wsize 23 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 26 pcks of size :1024 
+transmission configs : winsize :23 extrabuf in ring:3 maxseqN:52 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:57913
+
+cbuf of 26 pcks of size :1024 
+transmission configs : winsize :23 extrabuf in ring:3 maxseqN:52 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 3 , 756082 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 25 and extra space of 3
+./test.o k.mp4 25 3 0 
+TX_CONFIGS: wsize 25 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+CONNECTED WITH 127.0.0.1:52132
+connected with server at 127.0.0.1:5300
+cbuf of 28 pcks of size :1024 
+
+cbuf of 28 pcks of size :1024 
+transmission configs : winsize :25 extrabuf in ring:3 maxseqN:56 
+starting stopwatch 
+transmission configs : winsize :25 extrabuf in ring:3 maxseqN:56 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 3 , 534526 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 27 and extra space of 3
+./test.o k.mp4 27 3 0 
+TX_CONFIGS: wsize 27 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 30 pcks of size :1024 
+transmission configs : winsize :27 extrabuf in ring:3 maxseqN:60 
+starting stopwatch 
+CONNECTED WITH 127.0.0.1:44778
+
+cbuf of 30 pcks of size :1024 
+transmission configs : winsize :27 extrabuf in ring:3 maxseqN:60 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 3 , 374131 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 29 and extra space of 3
+./test.o k.mp4 29 3 0 
+TX_CONFIGS: wsize 29 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+CONNECTED WITH 127.0.0.1:35496
+
+cbuf of 32 pcks of size :1024 
+connected with server at 127.0.0.1:5300
+cbuf of 32 pcks of size :1024 
+transmission configs : winsize :29 extrabuf in ring:3 maxseqN:64 
+starting stopwatch 
+transmission configs : winsize :29 extrabuf in ring:3 maxseqN:64 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 2 , 958104 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 31 and extra space of 3
+./test.o k.mp4 31 3 0 
+TX_CONFIGS: wsize 31 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+connected with server at 127.0.0.1:5300
+cbuf of 34 pcks of size :1024 
+CONNECTED WITH 127.0.0.1:48112
+
+cbuf of 34 pcks of size :1024 
+transmission configs : winsize :31 extrabuf in ring:3 maxseqN:68 
+starting stopwatch 
+transmission configs : winsize :31 extrabuf in ring:3 maxseqN:68 
+
+ ACKKED 100% 
+acker OK!:)
+RESULT SENDER SIDE :success 
+
+
+ Elapsed secs and micros: 2 , 861266 
+
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+testing with winsize of 33 and extra space of 3
+./test.o k.mp4 33 3 0 
+TX_CONFIGS: wsize 33 extraRingBuffSpace 3 lossProb 0.000000 
+TESTING WITH FILE:k.mp4 of 884016901 bytes 
+CONNECTED WITH 127.0.0.1:43445
+
+cbuf of 36 pcks of size :1024 
+connected with server at 127.0.0.1:5300
+cbuf of 36 pcks of size :1024 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+starting stopwatch 
+transmission configs : winsize :33 extrabuf in ring:3 maxseqN:72 
+
+ ACKKED 100% 
+acker OK!:)
+
+
+ Elapsed secs and micros: 2 , 743298 
+
+RESULT SENDER SIDE :success 
+RESULT RECEIVER SIDE :success 
+ command string for test :diff k.mp4 a.mp4 
+RESULT DIFF OF FILES:success 
+END PHASE 1
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources$ 

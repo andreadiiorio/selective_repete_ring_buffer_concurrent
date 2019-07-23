@@ -1,0 +1,90 @@
+		da socket connect per receiver....(port euphemerial)
+N.B. per mantenera semantica buffer circolare sender & receiver devono accordarsi su winsize (equal)
+inoltre sender richiede extra buffer che anche receiver impiegherà
+	=>al fine di mantere easy mapping SEQN->PCK_INDEX 
+		->pck_index=SEQN%cbuf->size...
+
+in SENDER:
+N.B. producer non è limitato da consumer( socket_sender) MA È LIMITATO DA SNDBASE
+_________________________________________________________________________________________________
+
+		::::::::	:: THREADS ::: 		SENDER 		:::::::::::::
+_________________________________________________________________________________________________
+		:>ACKKER
+		CONSUMER_sndbase <-> GESTISCE RCVBASE==> PARTE DA 0
+		 
+		->ciclo infinito su connected socket per ricevere ack..
+			ack=>
+				-(new ack) (ack cade in sending win [sndbase,sndbase+winsize) e pck corrispondente NN RISULTA GIA ACKKED
+					->set in circbuf pckflag ACKKED & stop timer
+					=>se necessario (ack==sendbase) scorrifienstra *
+				<ELSE>
+				-(duplicate ack (premature timeout expire)) -> ignore...
+					->check se SEQN ACK in (sndbase-win,sndbase-1)....>MOD  cbuf->size
+		ENDING: 	
+			->recezione FIN ack... indica receiver ha ricevuto tutto
+			(PER GESTIRE LA POSSIBILE PERDITA DEL ACK FIN ) possibile
+			->ricezione last ack -> connection timer set 
+							->on expire ->shutdown...FIN ACK LOSS 
+							->sufficiente schedule sigalarm and signal it
+
+			=> notifica terminazion a thread_socketsender dato che null'altro dovrà essere spedito
+				->in situazione di chiusura dovrebbe avere timers de settati..
+
+
+	scorrifinestra *.1 
+		aggiorna RCVBASE
+			-producer possa leggere da file altri pck...
+			-sender possa spedire un nuovo pck (se ready) (vedendo consumer_index+winsize)
+_______________________________________________________________________________________________________________________
+	
+	thread_socketsender:> 	CONSUMER
+		si occupa della (ri)trasmissione dei pcks su socket, principalmente invia pck & periodicamente poll timers 
+		possiede un indice privato che rappresenta a che punto della finestra di trasmissione e arrivato a inviare
+		::VINCOLI PER L'INVIO::
+			->wait CONSUMER+1!=PRODUCER 		-->aspetta che ci sia un pacchetto pronto per l'invio
+			->wait CONSUMER+1!=RCVBASE+winsize	-->aspetta che la finestra di invio si muova su nuovi pcks
+				->se (solo) questa condizione:=> winfull.. INTESIFY POLL TIMERS
+			
+			se vincoli rispettati invia un altro pck sulla socket
+		
+		
+
+_______________________________________________________________________________________________________________________________________
+
+	thread_file_io:>	PRODUCER
+		legge da disco dati, pacchettizza e scrive su cbuf
+		generalmente sovrascrive vecchi pck:> vincolo di non andare MAI OLTRE RCVBASE->(pck inviati ma magari non riscontrati
+												 quindi ipoteticamente da reinviare)
+		
+		->SPINLOCK SU RCVBASE :> wait PRODUCER+1!=RCVBASE->pck_index		->aspetta che prossimo pck non sia sndbase
+			
+			legge da file un blocco di M<=(N_producibili (guardando sndbase) PCKS su circbuf
+		-quando la read wrappata ritorna EOF => file interamente letto => mark 1 extra pck con macro EOF_REATCHED + seqNum=FIN
+		-> e muori MUOVENDO PRIMA INDICE PRODUTTORE (in caso ultima attesa attiva su sndbase..)
+_________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________________________________________
+_________________________________________________________________________________________________________________________________________
+
+
+		::::::::	:: THREADS ::: 		RECEIVER 	:::::::::::::
+_________________________________________________________________________________________________
+	1)pck_receiver:>	PRODUTTORE
+		-legge da socket pck in buf temporaneo 
+		--->ECHO BACK SEQN through socket....
+			->discrimina pck duplicati se pck in [rcvbase - winsize,rcvbase-1] || pck corrispondente a seqN risulta gia ricevuto
+					-> valuta quindi pck duplicati prima della finestra attuale o oltre la finestra attuale<-
+			->discrimina pck nuovi se in [rcvbase,rcvbase+winsize)
+			->altrimenti ignora e vai alla prossima iterazione
+			-->rimepie ring buf fino a consumer index-1 -> aggiornando indice privato realtivo a cbuf...!
+			-->sposta propio indice condiviso (indice produttore) solo quando è arrivato un pck corrispondente a rcvbase
+							di quantità di pck consecutivi presenti -> pckReceivedHandler(seqN)
+
+	2)file_filler:>		CONSUMATORE
+		legge da circular buf pck fino a prod_index-1 scrivendoli su file
+		aggiorna proprio indice condiviso in seguito a successo write su file
+		-EXIT :
+			appena scritto ultimo pck ricevuto (file seek check)
+			-->uccidi producer
+			-->SCRIVI FIN ACK SU SOCKET -->causerà l'uscita del sender..

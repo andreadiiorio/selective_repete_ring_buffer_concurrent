@@ -1,0 +1,58 @@
+la logica del sender si appoggia a una struttura principale denominata scoreboard
+i pacchetti sono strutturati in un buffer circolare linkato in un unica direzione
+la logica di trasmissione secondo il protocollo teorico SELECTIVE REPETE è suddivisa su 3 thread che si occupano di 
+-> trasmettere pcks ->ricevere riscontri -> riempire il file con i dati 
+
+:::=>RING BUFFER generics 
+lo scoreboard si appoggia a un buffer circolare 1scrittore 1lettore la cui logica è la classica.
+Ovvero 
+-uno spinlock sull'indice del entità opposta (produttore->consumatore e viceversa ) per la sincronizzazione sulla produzione / consumo
+	=>ogni entita aspetta con attesa "attiva" (usleeped) finche la posizione prossima sul ringbuf non sia occupata dall'entità opposta
+	successivamente viene valutato il producibile-consumabile(ovvero la quantità di posizioni fino alla precedente dell'entità opposta)
+	e in seguito viene presa una decisione sulla quantità posizione da attraversare , valutando di consumare/produrre un blocco di posizioni 
+	o se semplicemente muoversi di 1 posizione nel ringbuffer
+
+-dalla sincronizzazione tramite spinlock si possono identificare  2 stati estrmi del ringbuffer
+	->buf pieno  (producer+1%bufsize = consumer)
+	->buf vuoto (consumer+1%bufsize=producer)
+
+-per ovviare alle ambiguita di buffer pieno-vuoto => viene lasciata sempre una posizione del buffer inutilizzata
+							=>in pratica PRODUCER SEMPRE ALMENO 1 POS PRIMA CONSUMER E VICEVERSA...
+-genericamente il produttore inizia dalla posizione 0 del ring buffer e il consumatore comincia dalla posizione -1 del ring buf
+- il produttore produce dalla sua posizione compresa fino al minimo tra la desiderata/producibile (consumer -1 )
+- il consumatore consuma dalla prossima posizione dalla propria fino alla massima desiderata/consumabile (producer -1
+
+-PCK SEQN MAP
+	per mantere una facile corrispondenca seqn%cbuf->size=pck index .. lo spazio di numerazione (maxseqn) = 2*cbuf->dimension
+... SPINLOCK RACE CONDITION ...
+
+            /*TODO HERE NOT HANDLED RACECOND BUT SAFE FOR SENSE OF BUF
+            //!!!!!!this value may be old( less then actual value of prodIndex)!!!!!!!
+            but consumer only MUSTN'T consume a block "in production"*/
+==>WIN SIZES
+  data finestra di invio=w, cbuf->dimension=w+1+EXTRABUFFER , valutando quindi posizione vuota dovuta a semantica disambiguazione ringbuffer
+							      e EXTRA BUFFER spazio extra per produrre pcks---->*
+app.h
+il buffer circolare è implementato tramite la struttura circularBuf che contiene al suo interno un puntatore a un array di pacchetti (allocati a run time data la dimensione della finestra puo essere configuarata a runtime volendo)
+
+è presente anche un implementazione del metodo di allocazione dato che tale struttura è utilizzata sia dal receiver che dal sender..
+
+_____________________________________________________________________________________________________________
+
+->SENDER EXTRA NOTES
+	:>CONSUMER:	
+		-(sender_th)mantiene un indice extra per indicare posizione raggiunta durante l'invio dei pck, 
+									semplice indice x mandare sempre pck succesivo
+		   -->di base sender deve controllare se prossimo pck è pronto(sender_indx+1 != producer) &
+						     &se finestra di invio non è piena(semaforo sendable...)
+		*->SOLO CON  EXTRABUFFER POSSO OTTENERE CONDIZIONE WINFULL->ALTRIMENTI SE FINESTRA PIENA RISULTA SEMPRE PRODUTTORE BLOCCATO DA ACKKER (consumer index glbl)
+
+
+		-(ackker_th)aggiorna indice consumer globale (visto da producer) ogni volta che la finestra puo scattare
+		:gestione ack sender:
+			->una volta ricevuto da RECEIVER ack (seqN di pck da riscontrare) 
+				-verra markato come ackked pck associato a seqN ricevuto
+				-se (seqN==sendBase) => la finestra puo scorrere! => verra calcolato 
+											skippableOut<-#pck che possono scorrere
+				
+

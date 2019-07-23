@@ -1,0 +1,28 @@
+CONDIZIONI DI USCITA IN LOGICA APPLICATA
+
+:: LATO SERVER	::
+IN ACCORDO CON L'ARCHITTETURA DELLA CONCORRENZA DEL SERVER
+1-> il main task gestisce la main socket
+	->MUORE SOLO IN SEGUITO A ERRORE O SIGINT
+		->PER ULTIMO! EVITANDO ZOMBIES
+
+2->il worker task legato a un client connesso persiste solo fino a quando il client non si disconnette
+	->in caso di ERRORE,INTERRUZIONE DI CONNESSIONE,..
+		->SIG USR1 PROPAGATO TRA TUTTI I FIGLI NOTIFICANDOLI DI MORIRE ->ESEGUITANNO EXIT
+		->ciclo wait ... DA SIG HANDLER
+		->EXIT
+3-> il task relegato all'operazione PUT/GET richiesta dal client persiste per la sola operazione
+	->in caso di errore/ricezione SIGUSR1 ---> SEMPLICE EXIT
+		=> TODO DEALLOCAZIONE // DISCONNESSION SOCKET OP RELEGATO A ???
+
+::LATO CLIENT::
+IN ACCORDO CON L'ARCHITTETURA DEL CLIENT
+1->il task principale che gestisce la connessione con il client muore per ultimo 
+	->in seguito a errore o disconnessione
+		=>PROPAGATO SIGUSR1 A FAMIGLIA -> NOTIFICHERÀ DEALLOCAZIONE & USCITA
+		=> CICLO DI WAIT PER UNZOBIES
+		=>EXIT
+2-> worker task -->relegato a op (server 3) in seguito a errore / segnalazione di terminazione
+	->dealloca strutture
+	->muore...
+

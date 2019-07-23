@@ -1,0 +1,78 @@
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources$ ./client.o 127.0.0.1 CLItrying connecting to server at addr :127.0.0.1 
+arrived -93 from 127.0.0.1:57962
+
+correctly connected with :127.0.0.1:57962 
+input mode cli
+
+:>	insert min trasmission window size for file tx
+10
+:>	insert pck loss simulation  probability 
+0
+SERIALIZED TX CONFIGS  SRC:	TX_CONFIG: WSIZE 10 	 MAX SEQN 30 	 EXTRA RING BUF SPACE 5 	 LOSS PROBABILITY 0.000000 
+
+USAGE
+
+->PUT 		 1
+->GET 		 2
+->LIST 		 3
+->DISCONNECT 	 0
+
+3
+AVAIBLE FILES ON SERVER:
+-cli_generateNullFile.sh	149
+
+-enjoy.mp4	62047639
+
+-k.mp4	884016901
+
+-generateNullFile.sh	149
+
+-cli_k.mp4	884016901
+
+-serv_k.mp4	884016901
+
+-serv_enjoy.mp4	62047639
+
+-cli_enjoy.mp4	62047639
+
+2
+
+INSERT FILENAME TO GET
+enjoy.mp4
+successfully obtained new connected socket for OP WITH :127.0.0.1:47569 
+GET CONNECTION OBTAINED correctly created a new process to handle GET req on pid :8009
+requested file(with prefix) : cli_enjoy.mp4 of size 62047639
+
+cbuf of 15 pcks of size :1000 
+transmission configs : winsize :10 extrabuf in ring:5 maxseqN:30 
+starting stopwatch 
+ WRITTED 0.998588   
+
+ Elapsed secs and micros: 0 , 575907 
+
+ WRITTED 0.999974   GET of cli_enjoy.mp4 result: success 
+,1.0,?
+
+<:: child    8009 terminated	 with:success
+1
+
+INSERT FILENAME TO PUT
+k.mp4
+successfully obtained new connected socket for OP WITH :127.0.0.1:33386 
+OBTAINED NEW CONNECTION FOR GET OP for filename k.mp4 on worker task PID:8006 
+newly created task with pid :8015 to handle PUT of file k.mp4 
+
+cbuf of 15 pcks of size :1000 
+transmission configs : winsize :10 extrabuf in ring:5 maxseqN:30 
+ ACKKED 100% 930 of tot 
+acker OK!:)
+PUT CLINT-SIDE ==> OK
+SERVER PUT OK!!!!!!!!!!
+
+<:: child    8015 terminated	 with:success
+0 
+disconnected request sent 
+
+ABORTING ALL OP 
+
+andysnake@debian:~/Scrivania/net/PRJNETWORKING/sources$ 

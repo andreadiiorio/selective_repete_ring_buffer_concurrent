@@ -1,0 +1,305 @@
+#include "PckFunctions.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+#include <errno.h>
+#include <netinet/in.h>
+#include <errno.h>
+#include <signal.h>
+#include <glob.h>
+#define DEBUG_IO    11
+/*
+ * pck io functions
+ */
+#ifndef PCKIOF
+#define PCKIOF
+
+
+int Openfile(const char* pathname, int flag){
+	//open a file with flag defined above
+	int fd;
+	errno=0;
+
+	fd=open(pathname,flag);
+	if(fd<0){
+		perror("open err");
+		return RESULT_FAILURE;
+	}
+	return fd;
+
+}
+int readline_socket(int fd,size_t bytesToRead,char* destBuf) {
+	/*
+	 * wrap read cycle of bytesToRead bytes from fd
+	 * will be returned posix err code standars to caller
+	 *              or EOFREACHED for endoffile
+	 * ON \n or \0 DETECTED  (indicating end of string or line end)
+	 * will be returned RESULT_SUCCESS
+	 */
+	ssize_t r, readed = 0;
+	while (bytesToRead > readed) {    //read byte from file into tmp buf
+		alarm(TIMEOUTCONNECTION);
+		errno=0;
+		r = read(fd, destBuf + readed, bytesToRead - readed);
+		if (r == 0) {               //EOF
+//			printf("reached EOF\n");
+			return EOF_REATCHED;
+		} else if (r == -1) {
+			perror("error in read..");fflush(NULL);
+			return RESULT_FAILURE;
+		}
+		for(int x=readed;x<readed+r;x++){
+			if(destBuf[x]=='\n' || destBuf[x]==0){
+				return RESULT_SUCCESS;			///break on newline detected or E O STR
+			}
+		}
+		readed += r;
+	alarm(0);
+	}
+	return RESULT_SUCCESS;
+}
+int readWrap(int fd,size_t bytesToRead,void* destBuf) {
+	/*
+	 * wrap read cycle of bytesToRead bytes from fd
+	 * will be returned posix err code standars to caller
+	 *              or EOFREACHED for endoffile
+	 * will be returned RESULT_SUCCESS only after readed bytesToRead from fd...
+	 */
+	ssize_t r, readed = 0;
+	while (bytesToRead > readed) {    //read byte from file into tmp buf
+		alarm(TIMEOUTCONNECTION);
+		errno=0;
+
+		r = read(fd, destBuf + readed, bytesToRead - readed);
+		if (r == 0) {               //EOF
+//			printf("reached EOF\n");
+			return EOF_REATCHED;
+		} else if (r == -1) {
+			perror("error in read..");fflush(NULL);
+			return RESULT_FAILURE;
+		}
+		readed += r;
+	alarm(0);
+	}
+	return RESULT_SUCCESS;
+}
+
+int writeWrap(int fd,size_t bytesToWrite,const void* sourceBuf ){
+	/*
+	 * wrap bytesToWrite byte write cycle
+	 * will be written on fd bytesToWrite bytes from sourceBuf...
+	 * return posix standard exitcode to caller conforming to result ...
+	 */
+	size_t writed=0;
+	ssize_t w=0;
+	while(writed<bytesToWrite){
+		errno=0;
+		w=write(fd, sourceBuf, bytesToWrite - writed);
+		if(w==-1){
+			perror("write err");fflush(NULL);
+			return RESULT_FAILURE;
+        }
+		writed+=w;
+		sourceBuf+=w;								//update source data pointer
+	}
+	return RESULT_SUCCESS;
+}
+
+////FILE <-> CBUF IO WRAP
+int readFileIntoCircBuff(int startPckIndex, int fd, int startSeqNum, size_t numPcks, struct circularBuf* cbuf){ //server producer work :)
+	/*
+	 continue reading from fd enought data to fill
+	 numPck Pck  structure from startAddr
+	 to optimize read will be allocated a temp buf to store data temp
+	 will be readed all bytes requested in tmp buff and next will be filled
+	 pcks structures from startAddrs
+	 startSeqNum is the first seq num for pcks to copy in circBuf...
+	 error occurred in read are returned to the caller...
+	*/
+	int ringSize=cbuf->dimension;
+	Pck* startAddrs=cbuf->ringBuf+startPckIndex;
+	size_t bytesToRead= numPcks * PCKPAYLOADSIZE;
+	int readResult=0;
+	if(numPcks==1){		//1 ONLY PCK TO READ=>DIRECT FILL CIRCBUF FROM FILE...
+		startAddrs->seqNum=startSeqNum;
+		startAddrs->flag_internal=UNACKKED;
+		void* dataDestAddr=&(startAddrs->data);
+		readResult=readWrap(fd,bytesToRead,dataDestAddr);   //write single pcks in circ buf
+        return readResult;
+	}
+	//>1 pck to read from file block to cbuf => wrap reads in tmp buf, then copy to cbuf...
+	void* tmpBuf=malloc(bytesToRead);                       //tmpbuf to store data for pcks...
+	if(!tmpBuf){
+		fprintf(stderr,"malloc error tmp buf for read file");
+	}
+
+	readResult=readWrap(fd,bytesToRead,tmpBuf);				//all file data requested readed into tmpbuf
+															//OS optimize large read ammount requests...
+	if(readResult==RESULT_FAILURE) {
+		free(tmpBuf);
+		return readResult;
+	}
+
+	void* tmpBufOrgin=tmpBuf;
+	//filling pcks structures from tmpbuf used to read bigger block then PCKPAYLOADSIZE->optimizing read time...
+
+	for(int i=0;i<numPcks;i++){
+		//calculating pck _i_ pointer to copy in data from tmp buf, carry out if needed
+		Pck* pck =cbuf->ringBuf+(i+startPckIndex)%ringSize;
+
+		//finally copy pck in cbuf with related attributes
+		memcpy(&(pck->data),tmpBuf,PCKPAYLOADSIZE); //copy data to fill pck data & here overwrited padding in case EOF
+		//fill default values
+		pck->seqNum=(startSeqNum+i)%(*cbuf->maxseqN);
+		//debug
+//		printf("writted seqn %d at %d \n",pck->seqNum,(startPckIndex+i)%cbuf->dimension);fflush(0);
+		pck->flag_internal=UNACKKED;
+
+		tmpBuf+=PCKPAYLOADSIZE;	//move pointer to next pck to copy in cbuf
+	}
+	free(tmpBufOrgin);
+	return readResult;      //here propagated only succes or EOF
+}
+
+
+int writeFileFromCircBuf(int startPckIndex,int fd,int numPcks,const unsigned long int fileSize,struct circularBuf* cbuf ){
+	/*
+	   will be written numPcks pcks correctly received
+	   stored from startPck, for >1 pck PAYLOADS will be extracted in tmp buff and then written to file
+	   will be extracted data from pck received only until will be reached bytesWritten==fileSize in transfer
+	   in return propagate exit result of write, if reached file size limit returned macro EOF_REATCHED
+	   (client threads...)PCK SEQN IS UNSED ..>SAFE UPDATABLE LOCKLESS BY CONSUMER
+	   */
+	errno=0;
+	off64_t bytesWritten=lseek64(fd,0,SEEK_CUR);
+#ifndef TEST_QUIET_PRINT
+	printf("\r WRITTED %f   ",((double) bytesWritten)/fileSize);
+#endif
+	if(bytesWritten==(off64_t)-1){
+		fprintf(stderr,"seek\n");
+		perror("seek");
+		return RESULT_FAILURE;
+	}
+	else if(bytesWritten==fileSize){
+		return EOF_REATCHED;
+	}
+	else if(bytesWritten>fileSize){  //DEBUG
+		fprintf(stderr,"ERR OVER WRITTEN ON FILE \n %ld on %ld",bytesWritten,fileSize);
+		fprintf(stderr,"DEMANDED %d PCKS\n",numPcks);fflush(0);
+		return RESULT_FAILURE;
+	}
+	int writeRes;
+	unsigned long int bytesToWrite= (unsigned int) (numPcks * PCKPAYLOADSIZE);
+	//exit condition reached check :)
+	bool eof_reached_flg=false;						//exit condition local flag
+	unsigned long int remainingToWrite=fileSize-bytesWritten;
+	if(bytesToWrite>=remainingToWrite){	//remaining of pck is useless->with this write will be reached FILESIZE
+		eof_reached_flg=true;
+		bytesToWrite=remainingToWrite; //n.b. remaining received on pck is pck padding of prev server memcpy :=)
+	}
+    Pck* startPck=cbuf->ringBuf+startPckIndex;
+	if(startPck->seqNum==FIN){
+//		fprintf(stderr,"FIN IN FILE FILLING REACHED\n");
+		return EOF_REATCHED;
+	}
+    if(numPcks==1){
+        startPck->flag_internal=WRITTED;
+        writeRes= writeWrap(fd,bytesToWrite,startPck->data);
+    }
+    else { //>=2 pcks to write, flush pcks in tmp buff, then write all buf in file
+		int ringBufSize = cbuf->dimension;
+		char *tmpBuf = malloc(numPcks*PCKPAYLOADSIZE);
+		if (!tmpBuf) {
+			fprintf(stderr, "error in malloc write tmp buf");
+			return RESULT_FAILURE;
+		}
+		//getting data from pcks structures
+		char *tmpBufPointer = tmpBuf;        //tmp pointer to copy data from pcks to tmpbuf
+		Pck *pck = startPck;
+		for (int z = 0; z < numPcks; z++) {
+			memcpy(tmpBufPointer, &(pck->data), PCKPAYLOADSIZE); //copy data in tmpbuf
+			pck->flag_internal = WRITTED;						 //mark as written to
+			tmpBufPointer += PCKPAYLOADSIZE;
+			pck = pck->nextPck;                                    //continue to next pck to write
+		}
+
+		writeRes = writeWrap(fd, bytesToWrite, tmpBuf);                //write wrapped, os optimize larger req.s
+		free(tmpBuf);
+	}
+	//propagate exit condition if right done last write :)
+	if(eof_reached_flg && writeRes==RESULT_SUCCESS)
+		return EOF_REATCHED;
+	return writeRes;											//propagate write result to caller...
+}
+
+void* serializePcks( int startPckIndx, int numPck,struct circularBuf*cbuf){
+     /* serilize numPck pcks from startpckaddr in a buffer ready to be sent on socket
+        no struct padding and netbyte order for seqNums
+        returned pointer to allocated sendbuf or NULL(error case)*/
+
+    void* serializedData=malloc((size_t) (numPck * SERIALIZED_SIZE_PCK));//point to 1st pck serialized,ready to be sent
+    if(!serializedData)
+        return NULL;
+	Pck * pck;
+	void* serializedTmp=serializedData;									//tmp copy of pointer to handle pck copy
+	for(int j=0;j<numPck;j++){
+		pck = (cbuf->ringBuf + (startPckIndx + j) % cbuf->dimension);
+        u_int32_t seqNumNetOrdered=htonl((uint32_t) pck->seqNum);              //change to net byte order
+        //serilize seqNUm
+        memcpy(serializedTmp,&seqNumNetOrdered,sizeof(seqNumNetOrdered));	//serialized seqN
+        serializedTmp+=sizeof(seqNumNetOrdered);                			//move pointer for payload
+		memcpy(serializedTmp,&pck->data,PCKPAYLOADSIZE);					//serialized payload
+		serializedTmp+=PCKPAYLOADSIZE;
+    }
+    return serializedData;													//original pointer not modified
+}
+
+int sent=0;
+#define DEBUG  //fast exit if simulated pck loss on 1 pck send for time......
+int sendPckThroughSocket(int startPckAddrIndex, int numPck, int socketfd,struct circularBuf* cbuf,
+						 struct timers_scheduled* timersScheduled){
+/*
+ * wrap sending pck on socket,
+ * pcks will be serialized in a tmpbuf (with serializePck function)
+ * wrapped posix timers, from timers module will be scheduled after pcks sending
+ */
+
+#ifdef  DEBUG
+	if(numPck==0)
+    return RESULT_SUCCESS;
+#endif
+	void* serializedPcks;										//serialize in netByteOrder before send...
+//	Pck* startPckAddr=cbuf->ringBuf+startPckAddrIndex;
+    serializedPcks = serializePcks(startPckAddrIndex, numPck,cbuf);
+    if(serializedPcks==NULL)
+        return RESULT_FAILURE;    //propagate tmp buf allocation error...
+
+	//TIMER SETUP BEFORE BECAUSE ACK ARRIVE BEFORE TIMERS SCHEDULE IS COMPLETE
+#ifdef RETRASMISSION
+//#include "timers.h"
+//#include "timers/timers.lc"
+	Pck * pck;
+	for(int x=0;x<numPck;x++){
+		//schedule timer _x
+		pck = cbuf->ringBuf + (x + startPckAddrIndex) % cbuf->dimension;
+		if(startTimer(&pck->timerPck,timersScheduled)==RESULT_FAILURE){
+			fprintf(stderr,"starting pck timer err\n");						//err->propagated
+			return RESULT_FAILURE;
+		}
+	}
+#endif
+	//SEND PCKs THROUGH SOCKET !
+    int writeRes=writeWrap(socketfd, (size_t) (SERIALIZED_SIZE_PCK * numPck), serializedPcks);	//WRITE ON SOCKET
+    free(serializedPcks);		//deallocate tmp buf allocated in sub function serializePck...
+
+//	printf("sent %d \n",++sent);
+    return writeRes;    //propagate write result to caller...
+}
+
+
+
+#endif

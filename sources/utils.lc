@@ -1,0 +1,400 @@
+//
+// Created by andysnake on 24/10/18.
+//
+
+#include "utils.h"
+#include "app.h"
+#include <assert.h>
+#include <sys/queue.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <errno.h>
+#include <sys/timeb.h>
+#include <sys/time.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <headers/PckFunctions.h>
+#include "sock_ntop.lc"
+#include <wait.h>
+
+void errExit(int signo) {
+    if(signo==SIGALRM)
+        fprintf(stderr,"TIMEOUT CONNECTION \n");
+    fprintf(stderr, "!!!!!!!!!!!!!!!!!\nerr_occurred\n");
+    fflush(0);
+    exit(EXIT_FAILURE);
+}
+
+int SocketWrap(){
+  int sockfd;
+  if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) { /* crea il socket */
+    perror("error in socket");
+    return RESULT_FAILURE;
+  }
+  else
+  	return sockfd;
+}
+int BindWrap(int sockfd,int port,in_addr_t ADDR){
+    //bind socket to specified inputs return macro RESULT_*
+  socklen_t len;
+  struct sockaddr_in addr;
+  memset((void *)&addr, 0, sizeof(addr));
+  addr.sin_family = AF_INET;
+  addr.sin_addr.s_addr = htonl(ADDR);
+//    addr.sin_addr.s_addr = htonl(INADDR_ANY); /* il server accetta pacchetti su una qualunque delle sue interfacce di rete */
+  addr.sin_port = htons(port); /* numero di porta del server */
+
+  /* assegna l'indirizzo al socket */
+  if (bind(sockfd, (SA *)&addr, sizeof(addr)) < 0) {
+    perror("error  in bind");
+    close(sockfd);
+    return RESULT_FAILURE;
+    }
+  else
+  	return RESULT_SUCCESS;
+
+}
+int dissolveConnection(int socket){
+    ///dissolving connection from socket to know new client port for new connected socket
+    struct sockaddr dissolveConnection;
+    dissolveConnection.sa_family=AF_UNSPEC;
+    if(connect(socket,&dissolveConnection,sizeof(dissolveConnection))<0){
+        perror("tmp disconnecting err");
+        fprintf(stderr,"dissolving error\n");
+        return RESULT_FAILURE;
+    }
+    return RESULT_SUCCESS;
+
+}
+
+
+bool probabilityHandler(double p){
+    // p is probability WILL BE USED AS IF p in (0,1), will be taken first 4 digit P=1000*p..rounded
+    // return true if random generated R  in range (-P/2,P/2) otherwise false
+    int P= (int) lrint(1000 * p);
+    long randVal=lrand48()%1000;
+//    printf("random choiced %d\n",randVal);
+    if(randVal<P)
+        return true;
+    else
+        return false;
+}
+
+
+
+int getNewConnection_ClientSide(int connectedSocket) {
+    /*
+     * get new connection with server comunicating to bounded server socket a new address of the new socket
+     * then an answer message will be received from a new server socket
+     * RETURNED MACRO RESULT_FAILURE or new connected socket fd
+     */
+    int newConnSocket=SocketWrap();                 //will hold new connected socket
+    struct sockaddr_in boundedAddr;                 //will hold new socket port and addr
+    socklen_t len = sizeof(boundedAddr);
+
+    //will hold serialized address (of new socket wildcard binding) tmp buf
+    //sended to server to estamblish new connection cli<->serv between new different connected socket
+    char addr_serialized[sizeof(boundedAddr.sin_addr.s_addr)+ sizeof(boundedAddr.sin_port)];
+
+    if(newConnSocket==RESULT_FAILURE)
+        return RESULT_FAILURE;
+    ///binding new socket to wildcard => AVAIBLE euphemeral port binded, then taken
+    if(BindWrap(newConnSocket,0,_CLI_ADDR_BIND)==RESULT_FAILURE){
+        fprintf(stderr,"wild card for euphemeral port binding err \n");
+        close(newConnSocket);
+        shutdown(newConnSocket,SHUT_RDWR);
+        return RESULT_FAILURE;
+    }
+    errno=0;
+    if(getsockname(newConnSocket, (SA*)&boundedAddr, &len)<0){
+        perror("getting bouded port from new OP socket");
+        return RESULT_FAILURE;
+    }
+    ///cpy serialized values in tmp buff
+    int tmpAddr=boundedAddr.sin_addr.s_addr;short tmpPort=boundedAddr.sin_port;             //tmp var for serialization
+    memcpy(addr_serialized,&tmpAddr,sizeof(tmpAddr));
+    memcpy(addr_serialized+ sizeof(tmpAddr),&tmpPort,sizeof(tmpPort));
+    ///sending server new client socket address for new connection
+    if(writeWrap(connectedSocket, sizeof(addr_serialized),addr_serialized)==RESULT_FAILURE){
+        goto    errExit;
+    }
+    ///wait server new connection response
+    controlcode connectionResponse;
+    struct sockaddr_in newAddrServ;
+    alarm(TIMEOUTCONNECTION);                   //timeout connection response...
+    if ((recvfrom(newConnSocket, &connectionResponse, sizeof(connectionResponse), 0, (SA *) &newAddrServ, &len)) <= 0){
+        perror("rcvfrom new connection response errror"); //error or empty UDP pck
+        goto errExit;
+    }
+    alarm(0);
+    if(connectionResponse==RESULT_SUCCESS){
+        ///connecting to newly server socket created for connection response sending
+        if(connect(newConnSocket,(SA*)&newAddrServ,len)<0){
+            perror("connecting to new server socket err ..");
+            goto errExit;
+        }
+        printf("successfully obtained new connected socket for OP WITH :%s \n",sock_ntop((SA*)&newAddrServ, sizeof(newAddrServ)));
+        return newConnSocket;                                           //finaly return newly connected socket
+    }
+    errExit:
+    fprintf(stderr,"new connection fail occurred\n");fflush(0);
+    shutdown(newConnSocket,SHUT_RDWR);
+    close(newConnSocket);
+    return RESULT_FAILURE;
+
+
+}
+
+int getNewConnection_ServerSide(int connectedSocket) {
+    /*
+     * get new connection with server by receiving new client socket address from connected socket
+     * then connecting a new socket to it and sending him a connection confirm
+     * return newly to client connected socket or RESULT_FAILURE
+     */
+    errno=0;
+    struct sockaddr_in newCliAddr,oldCliAddr;
+    memset(&newCliAddr,0, sizeof(newCliAddr));      //prepare struct at 0 &default fields
+    memset(&oldCliAddr,0, sizeof(oldCliAddr));      //prepare struct at 0 &default fields
+    newCliAddr.sin_family=AF_INET;
+    socklen_t len = sizeof(oldCliAddr);
+    if(getpeername(connectedSocket, (SA*)&oldCliAddr, &len) == -1){
+        perror("getting old cli addr to bind new ephemeral client port");
+        return RESULT_FAILURE;
+    }
+    printf("connected cli addr %s \n",sock_ntop((SA*)&oldCliAddr,len));
+    //will hold new client address serialized
+    char serializedNewClientAddr[sizeof(newCliAddr.sin_port)+ sizeof(newCliAddr.sin_addr.s_addr)];
+    ///receive new client socket address to connect to
+    alarm(TIMEOUTCONNECTION);               //set timeout on new connection request
+    if(readWrap(connectedSocket, sizeof(serializedNewClientAddr),serializedNewClientAddr)==RESULT_FAILURE)
+        return RESULT_FAILURE;
+    alarm(0);
+    ///deserializing address &fitting cli addr struct
+    //TODO CLI BIND TO WILDCARD PORT/ADDR ->NOT CHOICHED NET INTERFACE ADDR SENT...SET OLD ADDR
+    in_addr_t tmpAddr;in_port_t tmpPort;
+    memcpy(&tmpAddr,serializedNewClientAddr, sizeof(tmpAddr));
+    memcpy(&tmpPort,serializedNewClientAddr+ sizeof(tmpAddr), sizeof(tmpPort));         //getting values from tmp buff
+    newCliAddr.sin_port=tmpPort;
+    newCliAddr.sin_addr.s_addr=oldCliAddr.sin_addr.s_addr;
+    ///"connecting" to new cli addr
+    int newConnectSocket;
+    if((newConnectSocket = SocketWrap())==RESULT_FAILURE)
+        return RESULT_FAILURE;
+    if(connect(newConnectSocket, (SA*)&newCliAddr, sizeof(newCliAddr))<0){              //"naming" new socket with client
+        perror("connecting to new client addr err ");
+        goto    errExit;
+    }
+    ///sending connection confirm back to new client sockety
+    controlcode confirmResponse=RESULT_SUCCESS;
+    if(writeWrap(newConnectSocket,sizeof(confirmResponse),&confirmResponse)==RESULT_FAILURE){
+        goto    errExit;
+    }
+    printf("successfully obtained new connected socket for OP WITH :%s \n",sock_ntop((SA*)&newCliAddr, sizeof(newCliAddr)));
+    return newConnectSocket;
+    errExit:
+    shutdown(newConnectSocket,SHUT_RDWR);
+    close(newConnectSocket);
+    return RESULT_FAILURE;
+}
+
+
+typedef void Sigfunc(int signo);                                    //sigfunc proto
+int Sigaction(int signo, Sigfunc *func)
+{
+    //sigaction wrapper
+    struct sigaction	act, oact;
+    act.sa_handler = func;
+    sigemptyset(&act.sa_mask);
+    act.sa_flags = 0;
+    act.sa_flags |= SA_RESTART;
+//    act.sa_flags |= SA_INTERRUPT;
+
+    errno=0;
+    if (sigaction(signo, &act, &oact) ==-1){
+        perror("sigaction...");
+        return RESULT_FAILURE;
+    }
+//    return(oact.sa_handler);
+    return RESULT_SUCCESS;
+}
+
+void sig_chld(int signo)                                    //auto child wait when them dies...
+{
+    pid_t	pid;
+    int		stat;
+    while ( (pid = waitpid(-1, &stat, WNOHANG)) > 0) {
+        fprintf(stderr,"\n<:: child    %d terminated\t with:%s\n", pid,stat==EXIT_SUCCESS?"success":"fail");
+    }
+}
+
+int listCurrDir(struct FILES_LLIST_TYPE *head){
+    //list current dir items in linked list pointed from head
+    //returned result failure or ammount of listed files ( not "." and "..")
+
+    DIR* currDir;
+    if(!(currDir= opendir("."))) {
+        perror("opening curr dir ..");
+        return RESULT_FAILURE;
+    }
+    struct stat file_stat;
+    struct dirent* dir_entry;
+    struct file_ll* file_node;
+    int numItems=0;
+    while((dir_entry=readdir(currDir))!=NULL){
+        if(!strncmp(dir_entry->d_name,".",1) || !(strncmp(dir_entry->d_name,"..",1) ))
+            continue;                                                                       //SKIP CURR//FATHER DIR LINKS
+        if(stat(dir_entry->d_name,&file_stat)){
+            perror("getting dettailed info of a file ..");
+            return RESULT_FAILURE;
+        }
+        file_node=malloc(sizeof(struct file_ll));
+        if(!file_node){
+            fprintf(stderr,"invalid malloc file node for ls\n");
+            return RESULT_FAILURE;
+
+        }
+        numItems++;
+        strcpy(file_node->filename,dir_entry->d_name);
+        file_node->filesize= (unsigned long) file_stat.st_size;
+        SLIST_INSERT_HEAD(head,file_node,links);
+        //inserted in linked list headed from head pntr
+    }
+    return numItems;
+}
+
+////SERIALIZATION
+#define BIGENDIAN 1
+#define LITTLENDIAN 2
+///generic byte endianess conversion
+void SwapBytes(void *pv, size_t n,char dstEndianess,char srcEndianess)
+{
+    u_int32_t a=1;
+    char* firstByte= (char *) &a;
+    char machineEndianess=BIGENDIAN;
+    if(firstByte[0]==1)
+        machineEndianess = (char) LITTLE_ENDIAN;
+    if(machineEndianess!=dstEndianess ||
+            srcEndianess!=machineEndianess) {   //swap bytes only if needed
+        char *p = pv;
+        size_t lo, hi;
+        for (lo = 0, hi = n - 1; hi > lo; lo++, hi--) {
+            char tmp = p[lo];
+            p[lo] = p[hi];
+            p[hi] = tmp;
+        }
+    }
+}
+
+void serializeTXConfigs(const struct tx_config *requestedTxConfigs,void* serializedTmpBuffPntr){
+
+
+    int tmpInt; double tmpDbl;                               //serialize tmp vars
+    u_int32_t a=1;
+    char* firstByte= (char *) &a;
+    char machineEndianess=BIGENDIAN;
+    if(firstByte[0]==1)
+        machineEndianess = (char) LITTLE_ENDIAN;
+    //SERIALIZING WSIZE
+    tmpInt=htonl(requestedTxConfigs->wsize);
+    memcpy(serializedTmpBuffPntr,&tmpInt, sizeof(int));
+    serializedTmpBuffPntr+=sizeof(int);
+    //serializing MAX SEQN
+    tmpInt=htonl(requestedTxConfigs->maxseqN);
+    memcpy(serializedTmpBuffPntr,&tmpInt, sizeof(int));
+    serializedTmpBuffPntr+=sizeof(int);
+    //SERIALIZING EXTRA RING BUFF SPACE
+    tmpInt=htonl(requestedTxConfigs->extraBuffSpace);
+    memcpy(serializedTmpBuffPntr,&tmpInt, sizeof(int));
+    serializedTmpBuffPntr+=sizeof(int);
+    //SERIALIZING LOSS PROBABILITY
+    tmpDbl=requestedTxConfigs->p_loss;
+    SwapBytes(&tmpDbl, sizeof(tmpDbl),BIGENDIAN,machineEndianess);           //double rappresentation disambiguity
+    memcpy(serializedTmpBuffPntr,&tmpDbl, sizeof(tmpDbl));
+    printf("SERIALIZED TX CONFIGS  SRC:\t");
+    TX_CONFIG_PRINT(requestedTxConfigs);                    //debug echo back
+}
+
+void deserializeTXConfigs(struct tx_config *client_tx_config,void* _serializedTxTmpBuffPntr){
+
+    ///deserializing CLI TX CONFIGS
+    /*
+     * for each tx_config structure field will be fist initiated with serialized value
+     * then deserialized and tmp buf pointer moved...
+     */
+    ///getting machine endianess
+    u_int32_t a=1;
+    char* firstByte= (char *) &a;
+    char machineEndianess=BIGENDIAN;
+    if(firstByte[0]==1)
+        machineEndianess = (char) LITTLE_ENDIAN;
+    //taking wsize
+    memcpy(&client_tx_config->wsize,_serializedTxTmpBuffPntr, sizeof(client_tx_config->wsize));
+    client_tx_config->wsize=ntohl(client_tx_config->wsize);                                       //deserialize
+    _serializedTxTmpBuffPntr+= sizeof(client_tx_config->wsize);
+    //taking and setting max seqn
+    memcpy(&client_tx_config->maxseqN,_serializedTxTmpBuffPntr, sizeof(client_tx_config->maxseqN));
+    client_tx_config->maxseqN=ntohl(client_tx_config->maxseqN);                                       //deserialize
+    _serializedTxTmpBuffPntr+= sizeof(client_tx_config->maxseqN);
+    //taking extra ring buff space
+    memcpy(&client_tx_config->extraBuffSpace,_serializedTxTmpBuffPntr, sizeof(client_tx_config->extraBuffSpace));
+    client_tx_config->extraBuffSpace=ntohl(client_tx_config->extraBuffSpace);                           //deserialize
+    _serializedTxTmpBuffPntr+= sizeof(client_tx_config->extraBuffSpace);
+    //taking DEBUG PROB LOSS OF PCK
+    memcpy(&client_tx_config->p_loss,_serializedTxTmpBuffPntr, sizeof(client_tx_config->p_loss));
+    //manually swap bytes because of different rappresentation of double
+    SwapBytes(&client_tx_config->p_loss, sizeof(client_tx_config->p_loss),machineEndianess,BIGENDIAN);          //deserialize
+    printf("DE SERIALIZED TX CONFIGS  \n");
+    TX_CONFIG_PRINT(client_tx_config);     //print requested trasmission config
+}
+
+
+struct circularBuf* circularBufInit(unsigned int cbufSize){
+    /*
+     * allocate circular buff with cbufSize
+     * used from both client & server
+     */
+    printf("\ncbuf of %d pcks of size :%d \n",cbufSize,PCKPAYLOADSIZE);
+    if(cbufSize==0){
+        fprintf(stderr,"invalid size..\n");
+        return NULL;
+    }
+    struct circularBuf* cbuf=(struct circularBuf*) calloc(1,sizeof(struct circularBuf));
+    cbuf->ringBuf=(Pck*) calloc(cbufSize,sizeof(Pck));             //allocate circual buf with WINDOW SIZE
+    if(!cbuf || !cbuf->ringBuf){
+        fprintf(stderr,"err in circular buf allocation\n");
+        return NULL;
+    }
+    //init pck link and indexes
+    Pck * pck;
+    for(int x=0;x<cbufSize;x++){
+        pck = cbuf->ringBuf + x;
+        pck->pck_index=x;
+        pck->seqNum=x;
+        pck->nextPck=(cbuf->ringBuf+((x+1)%cbufSize));
+    }
+    cbuf->dimension=cbufSize;
+
+    //init circular buf indexes
+    cbuf->consumerIndex=cbufSize-1;
+    cbuf->producerIndex=0;
+
+
+    return cbuf;
+}
+
+
+#define longToString(ulong_value,strBuf)\
+    const int n = snprintf(NULL, 0, "%lu", ulong_value);\
+    assert(n > 0);\
+    char strBuf[n+1];\
+    int c = snprintf(buf, n+1, "%lu", ulong_value);\
+    assert(buf[n] == '\0' && c == n);
+
+

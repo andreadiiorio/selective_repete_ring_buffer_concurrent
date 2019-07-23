@@ -1,0 +1,28 @@
+RECEIVER
+->riceve pck da sender e risponde con ack == seqN del pck , scrivendo dati su file
+la ricezione prosegue fino a quando verrà ricevuto con successo l'ultimo pck che va a completare il file in ricezione
+	(TENUTO TRACCIA DI SEEK IN FILE WRITING vs FILESIZE nota prima dell'inizio della trasmissione)
+
+NB x S.R. semantic rcvbase= 1st pck non ricevuto nella receiver window
+:::THREADS:::::
+								
+1)->producer:	socket_receiver
+riceve da socket, valuta se il pck non è duplicato e marka nel cbuf...
+			->SEMPRE ACK BACK TO SENDER...prev ack may be losted ?
+			TODO OUT OF WIN ACK..?
+	
+SPINLOCK SU CONSUMER INDEX....SE PCK INDEX RICEVUTO È >= CONSUMER
+
+IDENTIFICAZIONE FIN CHE SETTA FLAG...
+muove rcvbase
+*(alternativa) SE fin_rcvd_flag è settato,&&global eof_reached flag settato->manda FIN ack e muore....
+		->return to main thread..
+
+2)->consumer
+SPINLOCK SU RCVBASE.....
+avanza nel ringbuffer e scrive su file pck presenti a partire da posizione prossima 
+fino ad arrivare limite(tradeoff consumabile-blocco di pck consumabili)
+EXIT:>a *EOF CONDITION==> fileSeek==fileSize (nota a priori)
+
+*UCCIDE PRODUTTORE E MANDA FIN ACK SU SOCKET CONSENTENDO CHIUSURA SENDER...timeout
+*(alternativa)	FLAGGA eof_reached shared flag su scoreboard e muore,

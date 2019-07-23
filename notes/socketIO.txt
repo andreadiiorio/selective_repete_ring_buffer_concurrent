@@ -1,0 +1,30 @@
+MSG KINDS{ 
+-COMANDO[client->server]	(list,get(filename),put(filename),...);
+	=> MACROS in controlcode type def
+
+-RISPOSTA[server->client]	(get->filesize or NOTAVAIBLE;list->filenames SEPARATED;put->transfer resoult
+} 
+	=>null terminated string or RESULT_FAILURE or NOTAVAIBLE macro
+
+->i messaggi di comando e risposta non comprendono la trasmissione del file...
+	MA PRECEDONO O RACCHIUDONO I MESSAGGI RELATIVI ALLA TRASMISSIONE
+
+[
+
+es:GET
+	CLIENT						SERVER
+				->list->
+			<-filename1;filename2;..<-
+			->get filename i ->
+			<- filesize || NOT AVAIBLE<-
+				<-PCKS...
+
+es:PUT
+		->put filename	->	
+			->DATA (SENDER<-CLIENT)	->
+		<-	trasmission resoult	<-
+
+]
+
+                       
+

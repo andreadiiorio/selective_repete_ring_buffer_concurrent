@@ -1,0 +1,30 @@
+CONNECTION IS KIND OF 3-WAY HANDSHAKE
+basically request->ping-pong of random num
+
+
+CLIENT				SERVER
+ 	--requestconnection ----> to well know port of server
+				.another task to check estamblish connection
+				.create new socket (service socket)
+					(euphemerical port binded on new socket)
+				.connected to client(just noted dest address)
+				
+				
+	<--random num reply on new socket
+	--> echo back to server random num on service socket on server
+				.connection end :) pass to mainloop serving
+				.*fork task to serve client :)
+
+*SIMILAR SYN FLOOD ATACK PROTECTION:
+(NB NOW FORKING JUST AFTER RECEIVE FIRST MSG FROM CLIENT TO SIMPLIFY)
+	possibility 0:
+	another task (connection tester) read from a pipe address of an incoming clint 
+		who want to connect to server
+	(this client has sent REQUSTCODE to well know port of server)
+	test connection with ping-pong of a random generated number
+	if client is ok (received echoed back num) => fork new child 
+		(it will be connectionTester son!)
+	possibility 1:
+		simply timeout on forked task(after receiving REQUESTCODE)
+		timeout expire => task die
+		otherwise => continue service :)

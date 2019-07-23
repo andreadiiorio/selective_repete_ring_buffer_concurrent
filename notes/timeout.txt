@@ -1,0 +1,60 @@
+in timer.h sono presenti strutture e prototipi di funzioni per gestione timer posix.
+1) i timer usati per la ritrasmissione sono posix timers, configurato per non dare notifica alla scadenza data(SIGEVNONE)
+	(ho evitato i segnali dato l'utilizzo dei thread,sconsigliato anche dal kerriks)
+
+   sono definiti PER OGNI PCK NEL RING BUF all'interno di app-h (COMPILE ERR?)
+   è associato per ogni pck|--> un timer identificato da un id ( ottenuto dall'inizializzazione dei posix timers) 
+   ed un flag per distinguere un timer ARMATO E SCADUTO e DISARMATO (entrambi conterrano remaining time=0)
+	-> la funzione poll osserva prima il flag per evitare inutili check su timer disarmato(!gettime slow :(( performace trick :))
+   EXTRA-> CON LA MACRO RETRASSMISSION si include nei pck il reference ai timer 
+  (non utili nel caso di volere un client che desidera esegue solo il la logica da  ricevitore per l'intera esecuzione)
+
+2)-->i timer schedulati si appoggiano alla struttura timers_scheduled dove ci sono 
+	-un mutex per la serializzazione di op critiche gestite da thread diversi (stop & poll)
+	-il numero di timer attivi -->FAST POLL CHECK(-->usato in poll per evitare controlli inutili dei timer realtime)
+	-un riferimento al indice del consumatore nel ringbuf:::> 
+			:>corrisponderà al primo pck nn ackkato=>1ST spedito con timer attivo da checkare (TODO INCONSISTENZA)
+	->sotto strutture per il timeout adattivo *(TIMEOUT-ADAPTION)
+
+3) principale gestione dei timer: start=>settime su posix timer, stop = settime=0 su posix timer,
+	poll:> scorri i pck -> timer per vedere chi è scaduto
+	in tutte tranne la start è utilizzato il mutex per serializzare l'accesso alla struttura...
+	(compresa la re-start dato che il lock è posseduto all'interno della poll)
+
+	N.B.->lock(reentrant) in start -> serializzazione tra invio e ricezione-> vanificato sforzo multithread...
+
+3.1)POLL: scorro pck tra first scheduled pck==>indice consumatore=ackker index=sndbase=primo non ackkato ma spedito
+	e dato indice di ultimo timer nel ringbuf<-- sender thread index
+	tra tali Pck controllo per ognuno se il timer associato ha flag DISAMED O PCK ACKKATO 
+			=> EVITO CONTROLLO POSIX GETTIME(non velocissima)
+
+		->in caso di EXPIRED TIMER->ritrasmetto tramite sendPckThroughSocket (in Pckfunction module)
+		=> il timer verra rischedulato se presente la MACRO RETRASSMISSION
+
+:> CONCORRENZA TRA SENDER & ACKKER threads all'interno dei timers...
+	->send->start(before a causa della latenza dello scheduling del timer) -> ACK PUO ARRIVARE SOLO DOPO UN INVIO ->quindi th.safe
+	:restart<-poll => posseduto lock, quindi ackker bloccato su eventuale ack ricevuto
+	:stop-> preso lock e disarmato timer
+
+_______________________________________________________________________________________________________________________________
+
+TIMEOUT-SETUP:
+	f(rtt<-ping vfork->  _execve)=>THRESHOLD_s ,initial timeout...
+TIMEOUT-ADAPTION:
+    cit consegna progetto:
+    "Oltre all’uso di un timeout fisso, deve essere
+     possibile scegliere l’uso di un valore per il timeout adattativo calcolato dinamicamente in base alla
+     evoluzione dei ritardi di rete osservati."
+
+     da ricezione ack, posso valutare tempo residuo in timer, volendo anche extra time dopo expire...
+     KEY PARAMETERS:
+
+     POLICY::::
+
+        ::>TIMEOUT EXPIRE* -..-> timeout=min(timeout + (fixed ammout),THRESHOLD_MAX)
+        ::>ACK ARRIVAL < TIMEOUT-..-> timeout = max(timeout-(fized ammount),TIMEOUT_MIN)
+
+
+    *->timeout_expire ambiguita tra pckloss, timeout too short
+    	cmq sia pckloss che timeout troppo corto=>congestion => ragionevole soluzione incrementare timeout...
+
